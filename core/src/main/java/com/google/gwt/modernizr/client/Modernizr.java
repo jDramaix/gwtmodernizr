@@ -2,8 +2,9 @@ package com.google.gwt.modernizr.client;
 
 import static com.google.gwt.modernizr.client.tests.Canvas.Canvas;
 import static com.google.gwt.modernizr.client.tests.CanvasText.CanvasText;
-import static com.google.gwt.modernizr.client.tests.Webgl.Webgl;
 import static com.google.gwt.modernizr.client.tests.Flexbox.Flexbox;
+import static com.google.gwt.modernizr.client.tests.Geolocation.Geolocation;
+import static com.google.gwt.modernizr.client.tests.Webgl.Webgl;
 
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.modernizr.client.tests.ModernizrTest;
@@ -120,116 +121,11 @@ public class Modernizr {
     return test(Flexbox);
   }
 
-  
-  /*public static boolean cssAnimations(){
+  public static boolean geolocation(){
     
-  }*/
-/*
-  tests['cssanimations'] = function() {
-        //  set_css_all( 'animation:"animate" 2s ease 2', 'position:relative' );
-        return test_props_all( 'animationName' );
-    };
-    
-    
-    tests['csscolumns'] = function() {
-        //  set_css_all( 'column-count:3' );
-        return test_props_all( 'columnCount' );
-    };
-    
-    
-    tests['cssgradients'] = function() {
-        /**
-         * For CSS Gradients syntax, please see:
-         * http://webkit.org/blog/175/introducing-css-gradients/
-         * https://developer.mozilla.org/en/CSS/-moz-linear-gradient
-         * https://developer.mozilla.org/en/CSS/-moz-radial-gradient
-         * http://dev.w3.org/csswg/css3-images/#gradients-
-         *
-        
-        var str1 = 'background-image:',
-            str2 = 'gradient(linear,left top,right bottom,from(#9f9),to(white));',
-            str3 = 'linear-gradient(left top,#9f9, white);';
-        
-        set_css(
-            (str1 + prefixes.join(str2 + str1) + prefixes.join(str3 + str1)).slice(0,-str1.length)
-        );
-        
-        return contains( m_style.backgroundImage, 'gradient' );
-    };
-    
-    
-    tests['cssreflections'] = function() {
-        //  set_css_all( 'box-reflect:right 1px' );
-        return test_props_all( 'boxReflect' );
-    };
-    
-    
-    tests['csstransforms'] = function() {
-        //  set_css_all( 'transform:rotate(3deg)' );
-        return !!test_props([ 'transformProperty', 'WebkitTransform', 'MozTransform', 'OTransform', 'msTransform' ]);
-    };
-    
-    
-    tests['csstransforms3d'] = function() {
-        //  set_css_all( 'perspective:500' );
-        
-        var ret = !!test_props([ 'perspectiveProperty', 'WebkitPerspective', 'MozPerspective', 'OPerspective', 'msPerspective' ]);
-        
-        // Webkit’s 3D transforms are passed off to the browser's own graphics renderer.
-        //   It works fine in Safari on Leopard and Snow Leopard, but not in Chrome (yet?).
-        //   As a result, Webkit typically recognizes the syntax but will sometimes throw a false
-        //   positive, thus we must do a more thorough check:
-        if (ret){
-          
-          // Webkit allows this media query to succeed only if the feature is enabled.    
-          // "@media (transform-3d),(-o-transform-3d),(-moz-transform-3d),(-ms-transform-3d),(-webkit-transform-3d),(modernizr){ ... }"      
-          ret = testMediaQuery('@media ('+prefixes.join('transform-3d),(')+'modernizr)');
-        }
-        return ret;
-    };
-    
-    
-    tests['csstransitions'] = function() {
-        //  set_css_all( 'transition:all .5s linear' );
-        return test_props_all( 'transitionProperty' );
-    };
-
-
- */
-  
-  /**
-   * test_props is a generic CSS / DOM property test; if a browser supports
-   *   a certain property, it won't return undefined for it.
-   *   A supported CSS property returns empty string when its not yet set.
-   */
-  /*private static boolean testCssProperties(String... properties){
-    for (String property : properties){
-      
-    }
-  }*/
-  /*function test_props( props, callback ) {
-      for ( var i in props ) {
-          if ( m_style[ props[i] ] !== undefined && ( !callback || callback( props[i], m ) ) ) {
-              return true;
-          }
-      }
-  }*/
-
-  /**
-   * test_props_all tests a list of DOM properties we want to check against.
-   *   We specify literally ALL possible (known and/or likely) properties on 
-   *   the element including the non-vendor prefixed one, for forward-
-   *   compatibility.
-   */
-  /*function test_props_all( prop, callback ) {
-    
-      var uc_prop = prop.charAt(0).toUpperCase() + prop.substr(1),
-          props   = (prop + ' ' + domPrefixes.join(uc_prop + ' ') + uc_prop).split(' ');
-
-      return !!test_props( props, callback );
-  }*/
-
-
+    return test(Geolocation);
+  }
+ 
   /**
    * isEventSupported determines if a given element supports the given event
    * function from http://yura.thinkweb2.com/isEventSupported/
