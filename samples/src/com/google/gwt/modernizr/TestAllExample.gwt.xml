@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module rename-to='testallexample'>
+  <!-- Inherit the core Web Toolkit stuff.                        -->
+  <inherits name='com.google.gwt.modernizr.GwtModernizr'/>
+
+  <!-- Specify the app entry point class.                         -->
+  <entry-point class='com.google.gwt.modernizr.client.TestAllExample'/>
+
+
+</module>
