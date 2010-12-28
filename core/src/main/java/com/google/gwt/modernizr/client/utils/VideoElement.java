@@ -1,4 +1,4 @@
-package com.google.gwt.modernizr.client;
+package com.google.gwt.modernizr.client.utils;
 
 
 import com.google.gwt.dom.client.Element;

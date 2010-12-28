@@ -1,6 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module rename-to='modernizr'>
-  <!-- Inherit the core Web Toolkit stuff.                        -->
-  <inherits name='com.google.gwt.user.User'/>    
+	<!-- Inherit the core Web Toolkit stuff.                        -->
+	<inherits name='com.google.gwt.user.User' />
+
+	<replace-with
+		class="com.google.gwt.modernizr.client.tests.AbstractModernizrTest.TestImplTrident">
+		<when-type-assignable
+			class="com.google.gwt.modernizr.client.tests.AbstractModernizrTest.TestImpl" />
+		<any>
+			<when-property-is name="user.agent" value="ie6" />
+			<when-property-is name="user.agent" value="ie8" />
+		</any>
+	</replace-with>
+
+	<replace-with
+		class="com.google.gwt.modernizr.client.tests.AbstractModernizrTest.TestImplGecko">
+		<when-type-assignable
+			class="com.google.gwt.modernizr.client.tests.AbstractModernizrTest.TestImpl" />
+		<any>
+			<when-property-is name="user.agent" value="gecko" />
+			<when-property-is name="user.agent" value="gecko1_8" />
+		</any>
+	</replace-with>
+
+	<replace-with
+		class="com.google.gwt.modernizr.client.tests.AbstractModernizrTest.TestImplOpera">
+		<when-type-assignable
+			class="com.google.gwt.modernizr.client.tests.AbstractModernizrTest.TestImpl" />
+		<any>
+			<when-property-is name="user.agent" value="opera" />
+		</any>
+	</replace-with>
+
+	<replace-with
+		class="com.google.gwt.modernizr.client.tests.AbstractModernizrTest.TestImplSafari">
+		<when-type-assignable
+			class="com.google.gwt.modernizr.client.tests.AbstractModernizrTest.TestImpl" />
+		<any>
+			<when-property-is name="user.agent" value="safari" />
+		</any>
+	</replace-with>
 
 </module>
