@@ -7,23 +7,53 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
 
 public class TestAllExample implements EntryPoint {
+  
+  private int testCounter;
+  private int subTestCounter;
 
   public void onModuleLoad() {
+    testCounter = 0;
+    subTestCounter = 0;
     //TODO put loading time !
     
     //Audio
-    RootPanel.get().add(new Label("HTML5 Audio :"+(Modernizr.audio() ? "yes" : "no")));
+    RootPanel.get().add(createLabel("Html5 audio", Modernizr.audio(), false));
     //Audio format
     for (AudioFormat format : AudioFormat.values()){
-      RootPanel.get().add(new Label("Audio format "+format.name()+":"+(Modernizr.audio(format) ? "yes" : "no")));
+      RootPanel.get().add(createLabel("audio format "+format.name(), Modernizr.audio(format), true));
     }
     
     //Video
-    RootPanel.get().add(new Label("HTML5 Video :"+(Modernizr.audio() ? "yes" : "no")));
+    RootPanel.get().add(createLabel("Html5 video", Modernizr.video(), false));
+   
     //Video format
     for (VideoFormat format : VideoFormat.values()){
-      RootPanel.get().add(new Label("Video format "+format.name()+":"+(Modernizr.video(format) ? "yes" : "no")));
+      RootPanel.get().add(createLabel("video format "+format.name(), Modernizr.video(format), true));
     }
+    
+    //Canvas
+    RootPanel.get().add(createLabel("Canvas", Modernizr.canvas(), false));
+    RootPanel.get().add(createLabel("Canvas text", Modernizr.canvasText(), false));
+    RootPanel.get().add(createLabel("webgl", Modernizr.webgl(), false));
+    
+    //flexbox
+    RootPanel.get().add(createLabel("Flexbox", Modernizr.flexbox(), false));
+    
+    //geolocation
+    RootPanel.get().add(createLabel("Geolocation", Modernizr.geolocation(), false));
+    
+
+  }
+  
+  private Label createLabel(String test, boolean testResult, boolean subTest){
+    if (!subTest){
+      subTestCounter = 1;
+      testCounter++;
+    }else{
+      subTestCounter++;
+    }
+    String s = ""+testCounter+"."+(subTest ? ""+subTestCounter+" " : " ")+test+": "+(testResult ? "true" : "false");
+    return new Label(s);
 
   }
 
