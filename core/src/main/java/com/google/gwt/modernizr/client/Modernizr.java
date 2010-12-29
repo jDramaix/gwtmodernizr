@@ -11,6 +11,10 @@ import static com.google.gwt.modernizr.client.tests.WebSqlDatabase.WebSqlDatabas
 import static com.google.gwt.modernizr.client.tests.Webgl.Webgl;
 import static com.google.gwt.modernizr.client.tests.History.History;
 import static com.google.gwt.modernizr.client.tests.DragAndDrop.DragAndDrop;
+import static com.google.gwt.modernizr.client.tests.WebSockets.WebSockets;
+import static com.google.gwt.modernizr.client.tests.Rgba.Rgba;
+import static com.google.gwt.modernizr.client.tests.Hsla.Hsla;
+import static com.google.gwt.modernizr.client.tests.MultipleBackground.MultipleBackground;
 
 import com.google.gwt.modernizr.client.tests.ModernizrTest;
 import com.google.gwt.modernizr.client.utils.AudioElement;
@@ -53,7 +57,6 @@ public class Modernizr {
     }
   }
 
-  
   public static boolean audio() {
     return audio(null);
   }
@@ -115,26 +118,41 @@ public class Modernizr {
   public static boolean postMessage() {
     return test(Postmessage);
   }
-  
+
   public static boolean webSqlDatabase() {
     return test(WebSqlDatabase);
   }
-  
+
   public static boolean indexedDB() {
     return test(IndexedDB);
   }
-  
 
   public static boolean hashChange() {
     return test(HashChange);
   }
-  
-  public static boolean history(){
+
+  public static boolean history() {
     return test(History);
   }
-  
-  public static boolean dragAndDrop(){
+
+  public static boolean dragAndDrop() {
     return test(DragAndDrop);
+  }
+
+  public static boolean webSockets() {
+    return test(WebSockets);
+  }
+  
+  public static boolean rgba() {
+    return test(Rgba);
+  }
+  
+  public static boolean hsla() {
+    return test(Hsla);
+  }
+  
+  public static boolean multipleBackgroung() {
+    return test(MultipleBackground);
   }
   
 

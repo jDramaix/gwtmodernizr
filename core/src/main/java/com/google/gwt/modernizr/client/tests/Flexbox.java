@@ -19,8 +19,8 @@ public class Flexbox extends AbstractModernizrTest {
     DivElement container = Document.get().createDivElement();
     DivElement child = Document.get().createDivElement();
 
-    container.getStyle().setProperty("cssText", "display: box; display: "+impl.getStyleVendorPrefix()+"box;width: 42px; padding: 0px;");
-    child.getStyle().setProperty("cssText", "box-flex: 1;"+impl.getStyleVendorPrefix()+"box-flex:1; width: 10px;");
+    setCss(container, "display: box; display: "+impl.getStyleVendorPrefix()+"box;width: 42px; padding: 0px;");
+    setCss(child, "box-flex: 1;"+impl.getStyleVendorPrefix()+"box-flex:1; width: 10px;");
     
     
     container.appendChild(child);

@@ -129,6 +129,11 @@ public abstract class AbstractModernizrTest implements ModernizrTest {
 
     return _isEventSupported(eventName, testElement);
   }
+  
+  protected void setCss(Element e, String css){
+    assert e != null : "Element cannot be null";
+    e.getStyle().setProperty("cssText", css);
+  }
 
   /**
    * function from http://yura.thinkweb2.com/isEventSupported/

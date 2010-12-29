@@ -60,13 +60,31 @@ public class TestAllExample implements EntryPoint {
     RootPanel.get().add(createLabel("IndexedDB", Modernizr.indexedDB(), false));
 
     // hashChange
-    RootPanel.get().add(createLabel("HashChange", Modernizr.hashChange(), false));
-    
+    RootPanel.get().add(
+        createLabel("HashChange", Modernizr.hashChange(), false));
+
     // history
     RootPanel.get().add(createLabel("History", Modernizr.history(), false));
-    
+
     // DragAndDrop
-    RootPanel.get().add(createLabel("DragAndDrop", Modernizr.dragAndDrop(), false));
+    RootPanel.get().add(
+        createLabel("DragAndDrop", Modernizr.dragAndDrop(), false));
+
+    // WebSockets
+    RootPanel.get().add(
+        createLabel("WebSockets", Modernizr.webSockets(), false));
+
+    // Rgba
+    RootPanel.get().add(
+        createLabel("rgba", Modernizr.rgba(), false));
+
+    // Hsla
+    RootPanel.get().add(
+        createLabel("hsla", Modernizr.hsla(), false));
+    
+    // Multiple background
+    RootPanel.get().add(
+        createLabel("Multiple background", Modernizr.multipleBackgroung(), false));
   }
 
   private Label createLabel(String test, boolean testResult, boolean subTest) {
