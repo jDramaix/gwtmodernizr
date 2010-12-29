@@ -41,4 +41,13 @@
 		</any>
 	</replace-with>
 
+	<replace-with
+		class="com.google.gwt.modernizr.client.tests.HashChange.ImplIE8">
+		<when-type-assignable
+			class="com.google.gwt.modernizr.client.tests.HashChange.ImplStandard" />
+		<any>
+			<when-property-is name="user.agent" value="ie8" />
+		</any>
+	</replace-with>
+
 </module>
