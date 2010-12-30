@@ -1,14 +1,22 @@
 package com.google.gwt.modernizr.client.tests;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.dom.client.DivElement;
+import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.Element;
+import com.google.gwt.dom.client.HeadElement;
 import com.google.gwt.dom.client.Style;
+import com.google.gwt.dom.client.StyleElement;
 import com.google.gwt.user.client.DOM;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public abstract class AbstractModernizrTest implements ModernizrTest {
+  
+  public interface CallBack {
+    public boolean call(Object data);
+  }
 
   static class TestImpl {
     
@@ -71,6 +79,7 @@ public abstract class AbstractModernizrTest implements ModernizrTest {
   }
   
   private final static Map<String, String> testElementTagByEvent;
+  protected final static Element modernizr = DOM.createElement("modernizr");
 
   static {
     testElementTagByEvent = new HashMap<String, String>();
@@ -134,6 +143,64 @@ public abstract class AbstractModernizrTest implements ModernizrTest {
     assert e != null : "Element cannot be null";
     e.getStyle().setProperty("cssText", css);
   }
+  
+  protected boolean testCssProperty(String property, CallBack callBack){
+    assert property != null && property.length() > 0 : "Property cannot be null or empty";
+    
+    String ucProperty = property.substring(0, 1).toUpperCase() + property.substring(1);
+    String[] properties = new String[]{property, impl.getDomVendorPrefix()+ucProperty};
+    for (String p : properties){
+      if (cssPropertyExist(modernizr.getStyle(), p) && (callBack == null || callBack.call(p))){
+        return true;
+      }
+    }
+    
+    return false;
+  }
+  
+  protected native boolean cssPropertyExist(Style s, String property)/*-{
+    return s[property] !== undefined;
+  }-*/;
+  
+  protected boolean testMediaQuery(String mediaQuery){
+    StyleElement style = Document.get().createStyleElement();
+    DivElement div = Document.get().createDivElement();
+    
+    style.setPropertyString("textContent", mediaQuery+ "{#modernizr{height:3px}}");
+    
+    HeadElement head = Document.get().getElementsByTagName("head").getItem(0).cast();
+    head.appendChild(style);
+    div.setId("modernizr");
+    Document.get().getDocumentElement().appendChild(div);
+    
+    boolean result = div.getOffsetHeight() == 3;
+    
+    style.removeFromParent();
+    div.removeFromParent();
+    
+    return result;
+    
+  }
+  
+  /*testMediaQuery = function(mq){
+
+    var st = document.createElement('style'),
+        div = doc.createElement('div'),
+        ret;
+
+    st.textContent = mq + '{#modernizr{height:3px}}';
+    (doc.head || doc.getElementsByTagName('head')[0]).appendChild(st);
+    div.id = 'modernizr';
+    docElement.appendChild(div);
+
+    ret = div.offsetHeight === 3;
+
+    st.parentNode.removeChild(st);
+    div.parentNode.removeChild(div);
+
+    return !!ret;
+
+  }*/
 
   /**
    * function from http://yura.thinkweb2.com/isEventSupported/

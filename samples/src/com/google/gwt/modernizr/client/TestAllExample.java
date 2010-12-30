@@ -85,6 +85,78 @@ public class TestAllExample implements EntryPoint {
     // Multiple background
     RootPanel.get().add(
         createLabel("Multiple background", Modernizr.multipleBackgroung(), false));
+    
+    // Border Image
+    RootPanel.get().add(
+        createLabel("Border image", Modernizr.borderImage(), false));
+    
+    // Border Radius
+    RootPanel.get().add(
+        createLabel("Border radius", Modernizr.borderRadius(), false));
+    
+    // Box Shadow
+    RootPanel.get().add(
+        createLabel("Box shadow", Modernizr.boxShadow(), false));
+    
+    // Text Shadow
+    RootPanel.get().add(
+        createLabel("Text shadow", Modernizr.textShadow(), false));
+    
+    // Opacity
+    RootPanel.get().add(
+        createLabel("Opacity", Modernizr.opacity(), false));
+    
+     // Css animations
+    RootPanel.get().add(
+        createLabel("Css animations", Modernizr.cssAnimations(), false));
+    
+    // Css columns
+    RootPanel.get().add(
+        createLabel("Css columns", Modernizr.cssColumns(), false));
+    
+    // Css gradient
+    RootPanel.get().add(
+        createLabel("Css gradient", Modernizr.cssGradients(), false));
+    
+ // Css reflections
+    RootPanel.get().add(
+        createLabel("Css reflections", Modernizr.cssReflections(), false));
+    
+ // Css transforms
+    RootPanel.get().add(
+        createLabel("Css transforms", Modernizr.cssTransforms(), false));
+    
+ // Css transforms 3d
+    RootPanel.get().add(
+        createLabel("Css transforms 3d", Modernizr.cssTransforms3d(), false));
+    
+ // Css transitions 
+    RootPanel.get().add(
+        createLabel("Css transitions", Modernizr.cssTransitions(), false));
+    
+ // Local storage
+    RootPanel.get().add(
+        createLabel("Local storage", Modernizr.localStorage(), false));
+    
+ // Session storage
+    RootPanel.get().add(
+        createLabel("Session storage", Modernizr.sessionStorage(), false));
+    
+ // Web worker
+    RootPanel.get().add(
+        createLabel("Web workers", Modernizr.webWorkers(), false));
+    
+ // Application cache
+    RootPanel.get().add(
+        createLabel("Application cache", Modernizr.applicationCache(), false));
+    
+ // Svg
+    RootPanel.get().add(
+        createLabel("svg", Modernizr.svg(), false));
+    
+ // Inline svg
+    RootPanel.get().add(
+        createLabel("inlinesvg", Modernizr.inlineSvg(), false));
   }
 
   private Label createLabel(String test, boolean testResult, boolean subTest) {

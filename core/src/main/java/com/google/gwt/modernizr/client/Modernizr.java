@@ -15,6 +15,24 @@ import static com.google.gwt.modernizr.client.tests.WebSockets.WebSockets;
 import static com.google.gwt.modernizr.client.tests.Rgba.Rgba;
 import static com.google.gwt.modernizr.client.tests.Hsla.Hsla;
 import static com.google.gwt.modernizr.client.tests.MultipleBackground.MultipleBackground;
+import static com.google.gwt.modernizr.client.tests.BorderImage.BorderImage;
+import static com.google.gwt.modernizr.client.tests.BorderRadius.BorderRadius;
+import static com.google.gwt.modernizr.client.tests.BoxShadow.BoxShadow;
+import static com.google.gwt.modernizr.client.tests.TextShadow.TextShadow;
+import static com.google.gwt.modernizr.client.tests.Opacity.Opacity;
+import static com.google.gwt.modernizr.client.tests.CssAnimations.CssAnimations;
+import static com.google.gwt.modernizr.client.tests.CssColumns.CssColumns;
+import static com.google.gwt.modernizr.client.tests.CssGradients.CssGradients;
+import static com.google.gwt.modernizr.client.tests.CssTransforms.CssTransforms;
+import static com.google.gwt.modernizr.client.tests.CssTransforms3d.CssTransforms3d;
+import static com.google.gwt.modernizr.client.tests.CssReflections.CssReflections;
+import static com.google.gwt.modernizr.client.tests.CssTransitions.CssTransitions;
+import static com.google.gwt.modernizr.client.tests.LocalStorage.LocalStorage;
+import static com.google.gwt.modernizr.client.tests.SessionStorage.SessionStorage;
+import static com.google.gwt.modernizr.client.tests.WebWorkers.WebWorkers;
+import static com.google.gwt.modernizr.client.tests.ApplicationCache.ApplicationCache;
+import static com.google.gwt.modernizr.client.tests.Svg.Svg;
+import static com.google.gwt.modernizr.client.tests.InlineSvg.InlineSvg;
 
 import com.google.gwt.modernizr.client.tests.ModernizrTest;
 import com.google.gwt.modernizr.client.utils.AudioElement;
@@ -142,20 +160,92 @@ public class Modernizr {
   public static boolean webSockets() {
     return test(WebSockets);
   }
-  
+
   public static boolean rgba() {
     return test(Rgba);
   }
-  
+
   public static boolean hsla() {
     return test(Hsla);
   }
-  
+
   public static boolean multipleBackgroung() {
     return test(MultipleBackground);
   }
-  
 
+  public static boolean borderImage() {
+    return test(BorderImage);
+  }
+
+  public static boolean borderRadius() {
+    return test(BorderRadius);
+  }
+
+  public static boolean boxShadow() {
+    return test(BoxShadow);
+  }
+
+  public static boolean textShadow() {
+    return test(TextShadow);
+  }
+  
+  public static boolean opacity() {
+    return test(Opacity);
+  }
+  
+  public static boolean cssAnimations() {
+    return test(CssAnimations);
+  }
+  
+  public static boolean cssColumns() {
+    return test(CssColumns);
+  }
+
+  public static boolean cssGradients() {
+    return test(CssGradients);
+  }
+  
+  public static boolean cssReflections() {
+    return test(CssReflections);
+  }
+  
+  public static boolean cssTransforms() {
+    return test(CssTransforms);
+  }
+  
+  public static boolean cssTransforms3d() {
+    return test(CssTransforms3d);
+  }
+  
+  public static boolean cssTransitions() {
+    return test(CssTransitions);
+  }
+  
+  public static boolean localStorage() {
+    return test(LocalStorage);
+  }
+  
+  public static boolean sessionStorage() {
+    return test(SessionStorage);
+  }
+  
+  public static boolean webWorkers() {
+    return test(WebWorkers);
+  }
+  
+  public static boolean applicationCache() {
+    return test(ApplicationCache);
+  }
+  
+  public static boolean svg() {
+    return test(Svg);
+  }
+  
+  public static boolean inlineSvg() {
+    return test(InlineSvg);
+  }
+    
+  
   public static void addTest(ModernizrTest test) {
     tests.put(test.getClass(), test);
   }

@@ -1,8 +1,6 @@
 package com.google.gwt.modernizr.client.tests;
 
-import com.google.gwt.dom.client.Element;
 import com.google.gwt.modernizr.client.Modernizr;
-import com.google.gwt.user.client.DOM;
 
 public class Hsla extends AbstractModernizrTest {
   
@@ -15,7 +13,6 @@ public class Hsla extends AbstractModernizrTest {
   
   @Override
   protected boolean runTest() {    
-    Element modernizr = DOM.createElement("modernizr");
     setCss(modernizr,"background-color:hsla(120,40%,100%,.5)");
     String backgroungColor = modernizr.getStyle().getBackgroundColor();
     // browsers re-map hsla() to rgba() internally,  except IE9 
