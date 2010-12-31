@@ -1,41 +1,51 @@
 package com.google.gwt.modernizr.client;
 
-import static com.google.gwt.modernizr.client.tests.Canvas.Canvas;
-import static com.google.gwt.modernizr.client.tests.CanvasText.CanvasText;
-import static com.google.gwt.modernizr.client.tests.Flexbox.Flexbox;
-import static com.google.gwt.modernizr.client.tests.Geolocation.Geolocation;
-import static com.google.gwt.modernizr.client.tests.HashChange.HashChange;
-import static com.google.gwt.modernizr.client.tests.IndexedDB.IndexedDB;
-import static com.google.gwt.modernizr.client.tests.Postmessage.Postmessage;
-import static com.google.gwt.modernizr.client.tests.WebSqlDatabase.WebSqlDatabase;
-import static com.google.gwt.modernizr.client.tests.Webgl.Webgl;
-import static com.google.gwt.modernizr.client.tests.History.History;
-import static com.google.gwt.modernizr.client.tests.DragAndDrop.DragAndDrop;
-import static com.google.gwt.modernizr.client.tests.WebSockets.WebSockets;
-import static com.google.gwt.modernizr.client.tests.Rgba.Rgba;
-import static com.google.gwt.modernizr.client.tests.Hsla.Hsla;
-import static com.google.gwt.modernizr.client.tests.MultipleBackground.MultipleBackground;
+import static com.google.gwt.modernizr.client.tests.ApplicationCache.ApplicationCache;
+import static com.google.gwt.modernizr.client.tests.Audio.Audio;
+import static com.google.gwt.modernizr.client.tests.Audio.M4aAudioFormat.M4aAudioFormat;
+import static com.google.gwt.modernizr.client.tests.Audio.Mp3AudioFormat.Mp3AudioFormat;
+import static com.google.gwt.modernizr.client.tests.Audio.OggAudioFormat.OggAudioFormat;
+import static com.google.gwt.modernizr.client.tests.Audio.WavAudioFormat.WavAudioFormat;
 import static com.google.gwt.modernizr.client.tests.BorderImage.BorderImage;
 import static com.google.gwt.modernizr.client.tests.BorderRadius.BorderRadius;
 import static com.google.gwt.modernizr.client.tests.BoxShadow.BoxShadow;
-import static com.google.gwt.modernizr.client.tests.TextShadow.TextShadow;
-import static com.google.gwt.modernizr.client.tests.Opacity.Opacity;
+import static com.google.gwt.modernizr.client.tests.Canvas.Canvas;
+import static com.google.gwt.modernizr.client.tests.CanvasText.CanvasText;
 import static com.google.gwt.modernizr.client.tests.CssAnimations.CssAnimations;
 import static com.google.gwt.modernizr.client.tests.CssColumns.CssColumns;
 import static com.google.gwt.modernizr.client.tests.CssGradients.CssGradients;
+import static com.google.gwt.modernizr.client.tests.CssReflections.CssReflections;
 import static com.google.gwt.modernizr.client.tests.CssTransforms.CssTransforms;
 import static com.google.gwt.modernizr.client.tests.CssTransforms3d.CssTransforms3d;
-import static com.google.gwt.modernizr.client.tests.CssReflections.CssReflections;
 import static com.google.gwt.modernizr.client.tests.CssTransitions.CssTransitions;
-import static com.google.gwt.modernizr.client.tests.LocalStorage.LocalStorage;
-import static com.google.gwt.modernizr.client.tests.SessionStorage.SessionStorage;
-import static com.google.gwt.modernizr.client.tests.WebWorkers.WebWorkers;
-import static com.google.gwt.modernizr.client.tests.ApplicationCache.ApplicationCache;
-import static com.google.gwt.modernizr.client.tests.Svg.Svg;
+import static com.google.gwt.modernizr.client.tests.DragAndDrop.DragAndDrop;
+import static com.google.gwt.modernizr.client.tests.Flexbox.Flexbox;
+import static com.google.gwt.modernizr.client.tests.Geolocation.Geolocation;
+import static com.google.gwt.modernizr.client.tests.HashChange.HashChange;
+import static com.google.gwt.modernizr.client.tests.History.History;
+import static com.google.gwt.modernizr.client.tests.Hsla.Hsla;
+import static com.google.gwt.modernizr.client.tests.IndexedDB.IndexedDB;
 import static com.google.gwt.modernizr.client.tests.InlineSvg.InlineSvg;
+import static com.google.gwt.modernizr.client.tests.LocalStorage.LocalStorage;
+import static com.google.gwt.modernizr.client.tests.MultipleBackground.MultipleBackground;
+import static com.google.gwt.modernizr.client.tests.Opacity.Opacity;
+import static com.google.gwt.modernizr.client.tests.Postmessage.Postmessage;
+import static com.google.gwt.modernizr.client.tests.Rgba.Rgba;
+import static com.google.gwt.modernizr.client.tests.SessionStorage.SessionStorage;
+import static com.google.gwt.modernizr.client.tests.Smil.Smil;
+import static com.google.gwt.modernizr.client.tests.Svg.Svg;
+import static com.google.gwt.modernizr.client.tests.SvgClipPaths.SvgClipPaths;
+import static com.google.gwt.modernizr.client.tests.TextShadow.TextShadow;
+import static com.google.gwt.modernizr.client.tests.Video.Video;
+import static com.google.gwt.modernizr.client.tests.Video.H264AudioFormat.H264AudioFormat;
+import static com.google.gwt.modernizr.client.tests.Video.OggVideoFormat.OggVideoFormat;
+import static com.google.gwt.modernizr.client.tests.Video.WebmAudioFormat.WebmAudioFormat;
+import static com.google.gwt.modernizr.client.tests.WebSockets.WebSockets;
+import static com.google.gwt.modernizr.client.tests.WebSqlDatabase.WebSqlDatabase;
+import static com.google.gwt.modernizr.client.tests.WebWorkers.WebWorkers;
+import static com.google.gwt.modernizr.client.tests.Webgl.Webgl;
 
 import com.google.gwt.modernizr.client.tests.ModernizrTest;
-import com.google.gwt.modernizr.client.utils.AudioElement;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -45,72 +55,64 @@ public class Modernizr {
   private static final Map<Class<? extends ModernizrTest>, ModernizrTest> tests = new HashMap<Class<? extends ModernizrTest>, ModernizrTest>();
 
   public static enum AudioFormat {
-    OGG("audio/ogg; codecs=\"vorbis\""), MP3("audio/mpeg;"), WAV(
-        "audio/wav; codecs=\"1\""), M4A("audio/x-m4a;"), AAC("audio/aac;");
+    OGG(OggAudioFormat, "audio/ogg; codecs=\"vorbis\""), MP3(Mp3AudioFormat,
+        "audio/mpeg;"), WAV(WavAudioFormat, "audio/wav; codecs=\"1\""), M4A(
+        M4aAudioFormat, "audio/x-m4a;", "audio/aac;");
 
-    private String type;
+    private String[] types;
+    private Class<? extends ModernizrTest> associatedTest;
 
-    private AudioFormat(String type) {
-      this.type = type;
+    private AudioFormat(Class<? extends ModernizrTest> test, String... types) {
+      this.types = types;
+      associatedTest = test;
     }
 
-    public String getType() {
-      return type;
+    public String[] getTypes() {
+      return types;
+    }
+
+    public Class<? extends ModernizrTest> getAssociatedTest() {
+      return associatedTest;
     }
   }
 
   public static enum VideoFormat {
-    OGG("video/ogg; codecs=\"theora\""), H264(
-        "video/mp4; codecs=\"avc1.42E01E\""), WEBM(
+    OGG(OggVideoFormat, "video/ogg; codecs=\"theora\""), H264(H264AudioFormat,
+        "video/mp4; codecs=\"avc1.42E01E\"","video/mp4; codecs=\"avc1.42E01E, mp4a.40.2\""), WEBM(WebmAudioFormat,
         "video/webm; codecs=\"vp8, vorbis\"");
 
-    private String type;
+    private String[] types;
+    private Class<? extends ModernizrTest> associatedTest;
 
-    private VideoFormat(String type) {
-      this.type = type;
+    private VideoFormat(Class<? extends ModernizrTest> test, String... types) {
+      this.types = types;
+      associatedTest = test;
     }
 
-    public String getType() {
-      return type;
+    public String[] getTypes() {
+      return types;
+    }
+
+    public Class<? extends ModernizrTest> getAssociatedTest() {
+      return associatedTest;
     }
   }
 
   public static boolean audio() {
-    return audio(null);
+    return test(Audio);
   }
 
   public static boolean audio(AudioFormat format) {
-    AudioElement element = AudioElement.create();
-    boolean isSupported = element.getPropertyBoolean("canPlayType");
-
-    if (format == null || !isSupported) {
-      return isSupported;
-    }
-
-    String formatSupported = element.canPlayType(format.getType());
-
-    return formatSupported != null && !"".equals(formatSupported)
-        && !"no".equals(formatSupported);
+    return test(format.getAssociatedTest());
 
   }
 
   public static boolean video() {
-    return video(null);
+    return test(Video);
   }
 
   public static boolean video(VideoFormat format) {
-    AudioElement element = AudioElement.create();
-    boolean isSupported = element.getPropertyBoolean("canPlayType");
-
-    if (format == null || !isSupported) {
-      return isSupported;
-    }
-
-    String formatSupported = element.canPlayType(format.getType());
-
-    return formatSupported != null && !"".equals(formatSupported)
-        && !"no".equals(formatSupported);
-
+    return test(format.getAssociatedTest());
   }
 
   public static boolean canvas() {
@@ -188,15 +190,15 @@ public class Modernizr {
   public static boolean textShadow() {
     return test(TextShadow);
   }
-  
+
   public static boolean opacity() {
     return test(Opacity);
   }
-  
+
   public static boolean cssAnimations() {
     return test(CssAnimations);
   }
-  
+
   public static boolean cssColumns() {
     return test(CssColumns);
   }
@@ -204,48 +206,55 @@ public class Modernizr {
   public static boolean cssGradients() {
     return test(CssGradients);
   }
-  
+
   public static boolean cssReflections() {
     return test(CssReflections);
   }
-  
+
   public static boolean cssTransforms() {
     return test(CssTransforms);
   }
-  
+
   public static boolean cssTransforms3d() {
     return test(CssTransforms3d);
   }
-  
+
   public static boolean cssTransitions() {
     return test(CssTransitions);
   }
-  
+
   public static boolean localStorage() {
     return test(LocalStorage);
   }
-  
+
   public static boolean sessionStorage() {
     return test(SessionStorage);
   }
-  
+
   public static boolean webWorkers() {
     return test(WebWorkers);
   }
-  
+
   public static boolean applicationCache() {
     return test(ApplicationCache);
   }
-  
+
   public static boolean svg() {
     return test(Svg);
   }
-  
+
   public static boolean inlineSvg() {
     return test(InlineSvg);
   }
-    
-  
+
+  public static boolean smil() {
+    return test(Smil);
+  }
+
+  public static boolean svgClipPaths() {
+    return test(SvgClipPaths);
+  }
+
   public static void addTest(ModernizrTest test) {
     tests.put(test.getClass(), test);
   }
