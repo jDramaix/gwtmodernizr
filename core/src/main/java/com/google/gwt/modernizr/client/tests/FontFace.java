@@ -1,6 +1,5 @@
 package com.google.gwt.modernizr.client.tests;
 
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.HeadElement;
 import com.google.gwt.dom.client.StyleElement;
