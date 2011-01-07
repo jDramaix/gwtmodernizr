@@ -6,13 +6,19 @@ import com.google.gwt.modernizr.client.utils.AudioElement;
 
 public class Audio extends AbstractModernizrTest {
 
-  public static class AbstractFormatAudioTest extends Audio {
+  public static class AudioFormatTest extends Audio {
+    private AudioFormat audioFormat;
 
-    protected boolean runTest(AudioFormat format) {
+    public AudioFormatTest(AudioFormat format) {
+      this.audioFormat = format;
+    }
+    
+    @Override
+    protected boolean runTest() {
       boolean isAudioSupported = super.runTest();
       if (isAudioSupported) {
         AudioElement element = AudioElement.create();
-        for (String type : format.getTypes()) {
+        for (String type : audioFormat.getTypes()) {
           String formatSupported = element.canPlayType(type);
 
           if (formatSupported != null && !"".equals(formatSupported)
@@ -25,62 +31,7 @@ public class Audio extends AbstractModernizrTest {
     }
   }
 
-  public static class OggAudioFormat extends AbstractFormatAudioTest {
-
-    public static final Class<OggAudioFormat> OggAudioFormat = OggAudioFormat.class;
-
-    static {
-      Modernizr.addTest(new OggAudioFormat());
-    }
-
-    @Override
-    protected boolean runTest() {
-      return runTest(AudioFormat.OGG);
-    }
-  }
-
-  public static class Mp3AudioFormat extends AbstractFormatAudioTest {
-
-    public static final Class<Mp3AudioFormat> Mp3AudioFormat = Mp3AudioFormat.class;
-
-    static {
-      Modernizr.addTest(new Mp3AudioFormat());
-    }
-
-    @Override
-    protected boolean runTest() {
-      return runTest(AudioFormat.MP3);
-    }
-  }
-
-  public static class WavAudioFormat extends AbstractFormatAudioTest {
-
-    public static final Class<WavAudioFormat> WavAudioFormat = WavAudioFormat.class;
-
-    static {
-      Modernizr.addTest(new WavAudioFormat());
-    }
-
-    @Override
-    protected boolean runTest() {
-      return runTest(AudioFormat.WAV);
-    }
-  }
-
-  public static class M4aAudioFormat extends AbstractFormatAudioTest {
-
-    public static final Class<M4aAudioFormat> M4aAudioFormat = M4aAudioFormat.class;
-
-    static {
-      Modernizr.addTest(new M4aAudioFormat());
-    }
-
-    @Override
-    protected boolean runTest() {
-      return runTest(AudioFormat.M4A);
-    }
-  }
-
+ 
   public static final Class<Audio> Audio = Audio.class;
 
   static {

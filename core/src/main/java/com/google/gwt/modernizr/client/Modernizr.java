@@ -2,10 +2,6 @@ package com.google.gwt.modernizr.client;
 
 import static com.google.gwt.modernizr.client.tests.ApplicationCache.ApplicationCache;
 import static com.google.gwt.modernizr.client.tests.Audio.Audio;
-import static com.google.gwt.modernizr.client.tests.Audio.M4aAudioFormat.M4aAudioFormat;
-import static com.google.gwt.modernizr.client.tests.Audio.Mp3AudioFormat.Mp3AudioFormat;
-import static com.google.gwt.modernizr.client.tests.Audio.OggAudioFormat.OggAudioFormat;
-import static com.google.gwt.modernizr.client.tests.Audio.WavAudioFormat.WavAudioFormat;
 import static com.google.gwt.modernizr.client.tests.BorderImage.BorderImage;
 import static com.google.gwt.modernizr.client.tests.BorderRadius.BorderRadius;
 import static com.google.gwt.modernizr.client.tests.BoxShadow.BoxShadow;
@@ -20,6 +16,7 @@ import static com.google.gwt.modernizr.client.tests.CssTransforms3d.CssTransform
 import static com.google.gwt.modernizr.client.tests.CssTransitions.CssTransitions;
 import static com.google.gwt.modernizr.client.tests.DragAndDrop.DragAndDrop;
 import static com.google.gwt.modernizr.client.tests.Flexbox.Flexbox;
+import static com.google.gwt.modernizr.client.tests.FontFace.FontFace;
 import static com.google.gwt.modernizr.client.tests.Geolocation.Geolocation;
 import static com.google.gwt.modernizr.client.tests.HashChange.HashChange;
 import static com.google.gwt.modernizr.client.tests.History.History;
@@ -36,19 +33,17 @@ import static com.google.gwt.modernizr.client.tests.Smil.Smil;
 import static com.google.gwt.modernizr.client.tests.Svg.Svg;
 import static com.google.gwt.modernizr.client.tests.SvgClipPaths.SvgClipPaths;
 import static com.google.gwt.modernizr.client.tests.TextShadow.TextShadow;
+import static com.google.gwt.modernizr.client.tests.Touch.Touch;
 import static com.google.gwt.modernizr.client.tests.Video.Video;
-import static com.google.gwt.modernizr.client.tests.Video.H264AudioFormat.H264AudioFormat;
-import static com.google.gwt.modernizr.client.tests.Video.OggVideoFormat.OggVideoFormat;
-import static com.google.gwt.modernizr.client.tests.Video.WebmAudioFormat.WebmAudioFormat;
 import static com.google.gwt.modernizr.client.tests.WebSockets.WebSockets;
 import static com.google.gwt.modernizr.client.tests.WebSqlDatabase.WebSqlDatabase;
 import static com.google.gwt.modernizr.client.tests.WebWorkers.WebWorkers;
 import static com.google.gwt.modernizr.client.tests.Webgl.Webgl;
-import static com.google.gwt.modernizr.client.tests.Touch.Touch;
-import static com.google.gwt.modernizr.client.tests.FontFace.FontFace;
 
 import com.google.gwt.modernizr.client.tests.Input;
 import com.google.gwt.modernizr.client.tests.ModernizrTest;
+import com.google.gwt.modernizr.client.tests.Audio.AudioFormatTest;
+import com.google.gwt.modernizr.client.tests.Video.VideoFormatTest;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -59,60 +54,61 @@ public class Modernizr {
 
   public static enum InputAttributes {
     AUTOCOMPLETE, AUTOFOCUS, LIST, PLACEHOLDER, MAX, MIN, MULTIPLE, PATTERN, REQUIRED, STEP;
-    
+
     private ModernizrTest test;
-    
+
     private InputAttributes() {
       test = new Input(name().toLowerCase());
     }
-    
+
     public ModernizrTest getAssociatedTest() {
       return test;
     }
   }
-  
-  
+
   public static enum AudioFormat {
-    OGG(OggAudioFormat, "audio/ogg; codecs=\"vorbis\""), MP3(Mp3AudioFormat,
-        "audio/mpeg;"), WAV(WavAudioFormat, "audio/wav; codecs=\"1\""), M4A(
-        M4aAudioFormat, "audio/x-m4a;", "audio/aac;");
+    OGG("audio/ogg; codecs=\"vorbis\""), 
+    MP3("audio/mpeg;"),
+    WAV("audio/wav; codecs=\"1\""), 
+    M4A("audio/x-m4a;", "audio/aac;");
 
     private String[] types;
-    private Class<? extends ModernizrTest> associatedTest;
+    private ModernizrTest test;
 
-    private AudioFormat(Class<? extends ModernizrTest> test, String... types) {
+    private AudioFormat(String... types) {
       this.types = types;
-      associatedTest = test;
+      this.test = new AudioFormatTest(this);
     }
 
     public String[] getTypes() {
       return types;
     }
 
-    public Class<? extends ModernizrTest> getAssociatedTest() {
-      return associatedTest;
+    private ModernizrTest getAssociatedTest() {
+      return test;
     }
   }
 
   public static enum VideoFormat {
-    OGG(OggVideoFormat, "video/ogg; codecs=\"theora\""), H264(H264AudioFormat,
-        "video/mp4; codecs=\"avc1.42E01E\"","video/mp4; codecs=\"avc1.42E01E, mp4a.40.2\""), WEBM(WebmAudioFormat,
-        "video/webm; codecs=\"vp8, vorbis\"");
+    OGG("video/ogg; codecs=\"theora\""), 
+    H264("video/mp4; codecs=\"avc1.42E01E\"",
+        "video/mp4; codecs=\"avc1.42E01E, mp4a.40.2\""), 
+    WEBM("video/webm; codecs=\"vp8, vorbis\"");
 
     private String[] types;
-    private Class<? extends ModernizrTest> associatedTest;
+    private ModernizrTest test;
 
-    private VideoFormat(Class<? extends ModernizrTest> test, String... types) {
+    private VideoFormat(String... types) {
       this.types = types;
-      associatedTest = test;
+      test = new VideoFormatTest(this);
     }
 
     public String[] getTypes() {
       return types;
     }
 
-    public Class<? extends ModernizrTest> getAssociatedTest() {
-      return associatedTest;
+    private ModernizrTest getAssociatedTest() {
+      return test;
     }
   }
 
@@ -121,7 +117,7 @@ public class Modernizr {
   }
 
   public static boolean audio(AudioFormat format) {
-    return test(format.getAssociatedTest());
+    return format.getAssociatedTest().getResult();
 
   }
 
@@ -130,7 +126,7 @@ public class Modernizr {
   }
 
   public static boolean video(VideoFormat format) {
-    return test(format.getAssociatedTest());
+    return format.getAssociatedTest().getResult();
   }
 
   public static boolean canvas() {
@@ -273,27 +269,23 @@ public class Modernizr {
     return test(SvgClipPaths);
   }
 
-
   public static boolean touch() {
     return test(Touch);
   }
 
-  public static boolean fontFace(){
+  public static boolean fontFace() {
     return test(FontFace);
   }
 
-  public static boolean input(InputAttributes attr){
+  public static boolean input(InputAttributes attr) {
     assert attr != null : "Please specify a InputAttributes object";
-    
+
     return attr.getAssociatedTest().getResult();
   }
 
-  
   public static void addTest(ModernizrTest test) {
     tests.put(test.getClass(), test);
   }
-  
-  
 
   public static <T extends ModernizrTest> boolean test(Class<T> test) {
 
