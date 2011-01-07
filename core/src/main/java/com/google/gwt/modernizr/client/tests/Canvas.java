@@ -15,7 +15,7 @@ public class Canvas extends AbstractModernizrTest {
   @Override
   protected boolean runTest() {
     CanvasElement canvas = CanvasElement.create();
-    return canvas.getPropertyBoolean("getContext") && canvas.getContext("2d") != null;
+    return  canvas.getContext("2d") != null;
   }
 
 }

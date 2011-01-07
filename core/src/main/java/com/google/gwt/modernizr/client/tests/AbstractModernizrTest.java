@@ -96,6 +96,8 @@ public abstract class AbstractModernizrTest implements ModernizrTest {
   protected TestImpl impl = GWT.create(TestImpl.class);
 
   public boolean getResult() {
+    GWT.log("getResult of "+this);
+    GWT.log("cachedResult "+cachedResult);
     if (cachedResult == null) {
       cachedResult = runTest();
     }
@@ -162,8 +164,8 @@ public abstract class AbstractModernizrTest implements ModernizrTest {
     style.setPropertyString("textContent", mediaQuery
         + "{#modernizr{height:3px}}");
 
-    HeadElement head = Document.get().getElementsByTagName("head").getItem(0)
-        .cast();
+    HeadElement head = getHeadElement();
+    
     head.appendChild(style);
     div.setId("modernizr");
     Document.get().getDocumentElement().appendChild(div);
@@ -176,7 +178,16 @@ public abstract class AbstractModernizrTest implements ModernizrTest {
     return result;
 
   }
+  
+  protected HeadElement getHeadElement(){
+    HeadElement head = Document.get().getElementsByTagName("head").getItem(0)
+    .cast();
+    return head;
+  }
 
+  protected native boolean propertyBelongToElement(Element element, String property)/*-{
+    return property in element;
+  }-*/;
 
 
   /**

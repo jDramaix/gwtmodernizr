@@ -13,7 +13,7 @@ public class LocalStorage extends AbstractModernizrTest {
   @Override
   protected boolean runTest() {
     try {
-      return getWindowElement().getPropertyBoolean("localStorage");
+      return propertyBelongToElement(getWindowElement(), "localStorage");
     } catch (Exception e) {
       return false;
     }

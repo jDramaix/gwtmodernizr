@@ -21,8 +21,8 @@ public class InlineSvg extends AbstractModernizrTest {
   protected boolean runTest() {
     DivElement div = Document.get().createDivElement();
     div.setInnerHTML("<svg/>");
-    
-    return SVG_NAMESPACE.equals(((Element)div.getFirstChild()).getPropertyString("namespaceURI"));
+    Element firstChild = (Element) div.getFirstChild();
+    return firstChild != null && SVG_NAMESPACE.equals(firstChild.getPropertyString("namespaceURI"));
   }
   
 

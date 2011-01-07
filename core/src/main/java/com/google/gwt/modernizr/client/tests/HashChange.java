@@ -22,8 +22,12 @@ public class HashChange extends AbstractModernizrTest {
   static class ImplIE8 extends ImplStandard{
     @Override
     protected boolean checkDocumentMode() {
-      return Document.get().getDocumentElement().getPropertyInt("documentMode") > 7;
+      return getDocumentMode(Document.get()) > 7;
     }
+    
+    private native int getDocumentMode(Document document)/*-{
+      return document.documentMode;
+    }-*/;
   }
   
   

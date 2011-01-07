@@ -13,7 +13,7 @@ public class WebSockets extends AbstractModernizrTest {
   
   @Override
   protected boolean runTest() {
-    return getWindowElement().getPropertyBoolean("WebSocket");
+    return propertyBelongToElement(getWindowElement(),"WebSocket");
   }
 
 }

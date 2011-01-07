@@ -13,7 +13,7 @@ public class SessionStorage extends AbstractModernizrTest {
   @Override
   protected boolean runTest() {
     try {
-      return getWindowElement().getPropertyBoolean("sessionStorage");
+      return propertyBelongToElement(getWindowElement(), "sessionStorage");
     } catch (Exception e) {
       return false;
     }
