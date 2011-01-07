@@ -39,8 +39,10 @@ import static com.google.gwt.modernizr.client.tests.WebSockets.WebSockets;
 import static com.google.gwt.modernizr.client.tests.WebSqlDatabase.WebSqlDatabase;
 import static com.google.gwt.modernizr.client.tests.WebWorkers.WebWorkers;
 import static com.google.gwt.modernizr.client.tests.Webgl.Webgl;
+import static com.google.gwt.modernizr.client.tests.BackgroundSize.BackgroundSize;
 
 import com.google.gwt.modernizr.client.tests.Input;
+import com.google.gwt.modernizr.client.tests.InputTypes;
 import com.google.gwt.modernizr.client.tests.ModernizrTest;
 import com.google.gwt.modernizr.client.tests.Audio.AudioFormatTest;
 import com.google.gwt.modernizr.client.tests.Video.VideoFormatTest;
@@ -52,12 +54,31 @@ public class Modernizr {
 
   private static final Map<Class<? extends ModernizrTest>, ModernizrTest> tests = new HashMap<Class<? extends ModernizrTest>, ModernizrTest>();
 
-  public static enum InputAttributes {
+  public static enum InputType {
+    SEARCH, TEL, URL, EMAIL, DATETIME, DATE, MONTH, WEEK, TIME, DATETIME_LOCAL, NUMBER, RANGE, COLOR;
+    
+    private ModernizrTest test;
+
+    private InputType() {
+      test = new InputTypes(toString());
+    }
+
+    public ModernizrTest getAssociatedTest() {
+      return test;
+    }
+    
+    @Override
+    public String toString() {
+      return name().toLowerCase().replace('_', '-');
+    }
+  }
+  
+  public static enum InputAttribute {
     AUTOCOMPLETE, AUTOFOCUS, LIST, PLACEHOLDER, MAX, MIN, MULTIPLE, PATTERN, REQUIRED, STEP;
 
     private ModernizrTest test;
 
-    private InputAttributes() {
+    private InputAttribute() {
       test = new Input(name().toLowerCase());
     }
 
@@ -188,6 +209,10 @@ public class Modernizr {
   public static boolean multipleBackgroung() {
     return test(MultipleBackground);
   }
+  
+  public static boolean backgroundSize() {
+    return test(BackgroundSize);
+  }
 
   public static boolean borderImage() {
     return test(BorderImage);
@@ -277,10 +302,16 @@ public class Modernizr {
     return test(FontFace);
   }
 
-  public static boolean input(InputAttributes attr) {
+  public static boolean inputAttribute(InputAttribute attr) {
     assert attr != null : "Please specify a InputAttributes object";
 
     return attr.getAssociatedTest().getResult();
+  }
+  
+  public static boolean inputType(InputType type) {
+    assert type != null : "Please specify a InputAttributes object";
+
+    return type.getAssociatedTest().getResult();
   }
 
   public static void addTest(ModernizrTest test) {

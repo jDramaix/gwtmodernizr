@@ -1,8 +1,10 @@
 package com.google.gwt.modernizr.client;
 
+import com.google.gwt.core.client.Duration;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.modernizr.client.Modernizr.AudioFormat;
-import com.google.gwt.modernizr.client.Modernizr.InputAttributes;
+import com.google.gwt.modernizr.client.Modernizr.InputAttribute;
+import com.google.gwt.modernizr.client.Modernizr.InputType;
 import com.google.gwt.modernizr.client.Modernizr.VideoFormat;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
@@ -11,33 +13,21 @@ public class TestAllExample implements EntryPoint {
 
   private int testCounter;
   private int subTestCounter;
+  private Duration time;
+  private int labelCreationTime;
 
   public void onModuleLoad() {
     testCounter = 0;
     subTestCounter = 0;
-    // TODO put loading time !
+    time = new Duration();
+    labelCreationTime = 0;
 
-    // Audio
-    createAndAddLabel("Font face", Modernizr.fontFace(), false);
+    // Loading time !
+    Label durationLabel = new Label();
+    RootPanel.get().add(durationLabel);
 
-    // Audio
-    createAndAddLabel("Html5 audio", Modernizr.audio(), false);
-    // Audio format
-    for (AudioFormat format : AudioFormat.values()) {
-
-      createAndAddLabel("audio format " + format.name(), Modernizr
-          .audio(format), true);
-    }
-
-    // Video
-    createAndAddLabel("Html5 video", Modernizr.video(), false);
-
-    // Video format
-    for (VideoFormat format : VideoFormat.values()) {
-
-      createAndAddLabel("video format " + format.name(), Modernizr
-          .video(format), true);
-    }
+    // flexbox
+    createAndAddLabel("Flexbox", Modernizr.flexbox(), false);
 
     // Canvas
     createAndAddLabel("Canvas", Modernizr.canvas(), false);
@@ -45,17 +35,17 @@ public class TestAllExample implements EntryPoint {
     createAndAddLabel("Canvas text", Modernizr.canvasText(), false);
     createAndAddLabel("webgl", Modernizr.webgl(), false);
 
-    // flexbox
-    createAndAddLabel("Flexbox", Modernizr.flexbox(), false);
+    // Touch
+    createAndAddLabel("Touch events", Modernizr.touch(), false);
 
     // geolocation
-    createAndAddLabel("Geolocation", Modernizr.geolocation(), false);
+    createAndAddLabel("Geolocation API", Modernizr.geolocation(), false);
 
     // Postmessage
     createAndAddLabel("Postmessage", Modernizr.postMessage(), false);
 
     // webSqlDatabase
-    createAndAddLabel("WebSqlDatabase", Modernizr.webSqlDatabase(), false);
+    createAndAddLabel("Web SQL Database", Modernizr.webSqlDatabase(), false);
 
     // indexedDB
     createAndAddLabel("IndexedDB", Modernizr.indexedDB(), false);
@@ -64,13 +54,13 @@ public class TestAllExample implements EntryPoint {
     createAndAddLabel("HashChange", Modernizr.hashChange(), false);
 
     // history
-    createAndAddLabel("History", Modernizr.history(), false);
+    createAndAddLabel("History management", Modernizr.history(), false);
 
     // DragAndDrop
-    createAndAddLabel("DragAndDrop", Modernizr.dragAndDrop(), false);
+    createAndAddLabel("Drag and Drop", Modernizr.dragAndDrop(), false);
 
     // WebSockets
-    createAndAddLabel("WebSockets", Modernizr.webSockets(), false);
+    createAndAddLabel("Web Sockets", Modernizr.webSockets(), false);
 
     // Rgba
     createAndAddLabel("rgba", Modernizr.rgba(), false);
@@ -81,6 +71,9 @@ public class TestAllExample implements EntryPoint {
     // Multiple background
     createAndAddLabel("Multiple background", Modernizr.multipleBackgroung(),
         false);
+
+    // Background size
+    createAndAddLabel("Background size", Modernizr.backgroundSize(), false);
 
     // Border Image
     createAndAddLabel("Border image", Modernizr.borderImage(), false);
@@ -99,27 +92,49 @@ public class TestAllExample implements EntryPoint {
 
     // Css animations
 
-    createAndAddLabel("Css animations", Modernizr.cssAnimations(), false);
+    createAndAddLabel("CSS animations", Modernizr.cssAnimations(), false);
 
     // Css columns
 
-    createAndAddLabel("Css columns", Modernizr.cssColumns(), false);
+    createAndAddLabel("CSS columns", Modernizr.cssColumns(), false);
 
     // Css gradient
 
-    createAndAddLabel("Css gradient", Modernizr.cssGradients(), false);
+    createAndAddLabel("CSS gradient", Modernizr.cssGradients(), false);
 
     // Css reflections
-    createAndAddLabel("Css reflections", Modernizr.cssReflections(), false);
+    createAndAddLabel("CSS reflections", Modernizr.cssReflections(), false);
 
     // Css transforms
-    createAndAddLabel("Css transforms", Modernizr.cssTransforms(), false);
+    createAndAddLabel("CSS transforms", Modernizr.cssTransforms(), false);
 
     // Css transforms 3d
-    createAndAddLabel("Css transforms 3d", Modernizr.cssTransforms3d(), false);
+    createAndAddLabel("CSS transforms 3d", Modernizr.cssTransforms3d(), false);
 
     // Css transitions
-    createAndAddLabel("Css transitions", Modernizr.cssTransitions(), false);
+    createAndAddLabel("CSS transitions", Modernizr.cssTransitions(), false);
+
+    // Audio
+    createAndAddLabel("Font face", Modernizr.fontFace(), false);
+
+    // Audio
+    createAndAddLabel("HTML5 audio", Modernizr.audio(), false);
+    // Audio format
+    for (AudioFormat format : AudioFormat.values()) {
+
+      createAndAddLabel("audio format " + format.name(), Modernizr
+          .audio(format), true);
+    }
+
+    // Video
+    createAndAddLabel("HTML5 video", Modernizr.video(), false);
+
+    // Video format
+    for (VideoFormat format : VideoFormat.values()) {
+
+      createAndAddLabel("video format " + format.name(), Modernizr
+          .video(format), true);
+    }
 
     // Local storage
     createAndAddLabel("Local storage", Modernizr.localStorage(), false);
@@ -134,46 +149,72 @@ public class TestAllExample implements EntryPoint {
     createAndAddLabel("Application cache", Modernizr.applicationCache(), false);
 
     // Svg
-    createAndAddLabel("svg", Modernizr.svg(), false);
+    createAndAddLabel("SVG", Modernizr.svg(), false);
 
     // Inline svg
-    createAndAddLabel("inlinesvg", Modernizr.inlineSvg(), false);
+    createAndAddLabel("Inline SVG", Modernizr.inlineSvg(), false);
 
-    // Touch
-    createAndAddLabel("touch", Modernizr.touch(), false);
+    // Smil
+    createAndAddLabel("SMIL", Modernizr.smil(), false);
+    
+    // Svg clip paths
+    createAndAddLabel("SVG Clipping", Modernizr.svgClipPaths(), false);
 
     // Input attributes
-    boolean atLeastOneOk = false;
-    for (InputAttributes attr : InputAttributes.values()) {
-      atLeastOneOk |= Modernizr.input(attr);
+    createAndAddLabel("Input attributes", null, false);
+
+    for (InputAttribute attr : InputAttribute.values()) {
+      createAndAddLabel(attr.name().toLowerCase(), Modernizr.inputAttribute(attr), true);
+    }
+    
+    // Input types
+    createAndAddLabel("Input types", null, false);
+
+    for (InputType type : InputType.values()) {
+      createAndAddLabel(type.toString(), Modernizr.inputType(type), true);
     }
 
-    createAndAddLabel("Input attributes", atLeastOneOk, false);
+    // set durationTime
+    int gwtModernizrTime = time.elapsedMillis() - labelCreationTime;
+    durationLabel.setText("GWTModernizr took: " + gwtModernizrTime + "ms");
 
-    for (InputAttributes attr : InputAttributes.values()) {
-      createAndAddLabel(attr.name().toLowerCase(), Modernizr.input(attr), true);
-    }
-
+    /*
+     * //for testing purpose
+     * 
+     * Button reload = new Button("reload"); reload.addClickHandler(new
+     * ClickHandler() {
+     * 
+     * public void onClick(ClickEvent event) { RootPanel.get().clear();
+     * onModuleLoad();
+     * 
+     * } }); RootPanel.get().add(reload);
+     */
   }
 
-  private void createAndAddLabel(String test, boolean testResult,
+  private void createAndAddLabel(String test, Boolean testResult,
       boolean subTest) {
-    computeCounters(subTest);   
-    
+    Duration creationLabelDuration = new Duration();
+
+    computeCounters(subTest);
+
     String s = "" + testCounter + "."
         + (subTest ? "" + subTestCounter + " " : " ") + test + ": "
-        + (testResult ? "true" : "false");
-    
+        + (testResult != null ? testResult : "");
+
     Label l = new Label(s);
-    
-    if (subTest){
+
+    if (subTest) {
       l.addStyleName("subTest");
     }
-    if (testResult){
+    if (testResult == null) {
+      l.addStyleName("black");
+    } else if (testResult) {
       l.addStyleName("yes");
     }
-    
+
     RootPanel.get().add(l);
+
+    labelCreationTime += creationLabelDuration.elapsedMillis();
 
   }
 
@@ -184,7 +225,7 @@ public class TestAllExample implements EntryPoint {
     } else {
       subTestCounter++;
     }
-    
+
   }
 
 }

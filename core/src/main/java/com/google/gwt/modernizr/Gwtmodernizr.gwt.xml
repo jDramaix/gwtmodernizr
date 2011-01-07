@@ -49,4 +49,13 @@
 			<when-property-is name="user.agent" value="ie8" />
 		</any>
 	</replace-with>
+	
+	<replace-with
+		class="com.google.gwt.modernizr.client.tests.InputTypes.WebKitImpl">
+		<when-type-assignable
+			class="com.google.gwt.modernizr.client.tests.InputTypes.Impl" />
+		<any>
+			<when-property-is name="user.agent" value="safari" />
+		</any>
+	</replace-with>
 </module>
