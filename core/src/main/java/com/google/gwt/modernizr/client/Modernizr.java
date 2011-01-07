@@ -44,7 +44,10 @@ import static com.google.gwt.modernizr.client.tests.WebSockets.WebSockets;
 import static com.google.gwt.modernizr.client.tests.WebSqlDatabase.WebSqlDatabase;
 import static com.google.gwt.modernizr.client.tests.WebWorkers.WebWorkers;
 import static com.google.gwt.modernizr.client.tests.Webgl.Webgl;
+import static com.google.gwt.modernizr.client.tests.Touch.Touch;
+import static com.google.gwt.modernizr.client.tests.FontFace.FontFace;
 
+import com.google.gwt.modernizr.client.tests.Input;
 import com.google.gwt.modernizr.client.tests.ModernizrTest;
 
 import java.util.HashMap;
@@ -54,6 +57,21 @@ public class Modernizr {
 
   private static final Map<Class<? extends ModernizrTest>, ModernizrTest> tests = new HashMap<Class<? extends ModernizrTest>, ModernizrTest>();
 
+  public static enum InputAttributes {
+    AUTOCOMPLETE, AUTOFOCUS, LIST, PLACEHOLDER, MAX, MIN, MULTIPLE, PATTERN, REQUIRED, STEP;
+    
+    private ModernizrTest test;
+    
+    private InputAttributes() {
+      test = new Input(name().toLowerCase());
+    }
+    
+    public ModernizrTest getAssociatedTest() {
+      return test;
+    }
+  }
+  
+  
   public static enum AudioFormat {
     OGG(OggAudioFormat, "audio/ogg; codecs=\"vorbis\""), MP3(Mp3AudioFormat,
         "audio/mpeg;"), WAV(WavAudioFormat, "audio/wav; codecs=\"1\""), M4A(
@@ -255,9 +273,27 @@ public class Modernizr {
     return test(SvgClipPaths);
   }
 
+
+  public static boolean touch() {
+    return test(Touch);
+  }
+
+  public static boolean fontFace(){
+    return test(FontFace);
+  }
+
+  public static boolean input(InputAttributes attr){
+    assert attr != null : "Please specify a InputAttributes object";
+    
+    return attr.getAssociatedTest().getResult();
+  }
+
+  
   public static void addTest(ModernizrTest test) {
     tests.put(test.getClass(), test);
   }
+  
+  
 
   public static <T extends ModernizrTest> boolean test(Class<T> test) {
 
