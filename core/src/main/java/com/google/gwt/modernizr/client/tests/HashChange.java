@@ -1,40 +1,71 @@
+/*
+ * Copyright 2011 Julien Dramaix.
+ * 
+ * Licensed under the MIT License, Version 2.0 (the "License"); 
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
+ * 
+ * GWTModernizr is a clone of Modernizr js library (http://www.modernizr.com)
+ * initially developed by: 
+ *    - Faruk Ates  http://farukat.es/
+ *    - Paul Irish  http://paulirish.com/
+ */
 package com.google.gwt.modernizr.client.tests;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.modernizr.client.Modernizr;
 
+/**
+ *  
+ * @author Julien Dramaix (julien.dramaix@gmail.com, @jdramaix)
+ * 
+ */
 public class HashChange extends AbstractModernizrTest {
-  
-  public static final Class<HashChange> HashChange = HashChange.class;
-  public static final ImplStandard innerImpl = GWT.create(ImplStandard.class);
-  
-  static {
-    Modernizr.addTest(new HashChange());
-  }
-  
-  static class ImplStandard {
-    protected boolean checkDocumentMode(){
-      return true;
-    }
-  }
-  
-  static class ImplIE8 extends ImplStandard{
+
+  static class ImplIE8 extends ImplStandard {
     @Override
     protected boolean checkDocumentMode() {
       return getDocumentMode(Document.get()) > 7;
     }
-    
+
     private native int getDocumentMode(Document document)/*-{
       return document.documentMode;
     }-*/;
   }
-  
-  
-  @Override
-  protected boolean runTest() {    
-    return isEventSupported("hashchange", getWindowElement()) && innerImpl.checkDocumentMode() ;
+  static class ImplStandard {
+    protected boolean checkDocumentMode() {
+      return true;
+    }
   }
-  
+
+  public static final Class<HashChange> HashChange = HashChange.class;
+
+  public static final ImplStandard innerImpl = GWT.create(ImplStandard.class);
+
+  static {
+    Modernizr.addTest(new HashChange());
+  }
+
+  @Override
+  protected boolean runTest() {
+    return isEventSupported("hashchange", getWindowElement())
+        && innerImpl.checkDocumentMode();
+  }
 
 }
