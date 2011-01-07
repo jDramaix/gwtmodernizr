@@ -25,7 +25,10 @@ public class CanvasElement extends Element{
   }
 
   public final native Object getContext(String ctxType) /*-{
-    return this.getContext(ctxType);
+    if (!!this.getContext){
+      return this.getContext(ctxType);
+    }
+    return null;
   }-*/;
 
   public final native boolean isTextSupported()/*-{
