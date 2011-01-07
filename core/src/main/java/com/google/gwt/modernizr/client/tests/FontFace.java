@@ -10,6 +10,26 @@ import com.google.gwt.regexp.shared.RegExp;
 
 public class FontFace extends AbstractModernizrTest {
 
+  private static class Css2SupportRuleTest extends SupportRuleTest {
+
+    @Override
+    public boolean isFontFaceSupported(StyleSheet sheet) {
+      if (sheet == null) {
+        return false;
+      }
+      try {
+        sheet.insertRule(FONT_FACE_RULE, 0);
+        boolean result = !UNKNOWN_REGULAR_EXPRESSION.test(sheet.getCssRules()
+            .item(0).getCssText());
+        sheet.deleteRule(sheet.getCssRules().getLenght() - 1);
+        return result;
+      } catch (Exception e) {
+        return false;
+      }
+
+    }
+  }
+
   private static class SupportRuleTest {
 
     public static String FONT_FACE_RULE = "@font-face { font-family: \"font\"; src: \"font.ttf\"; }";
@@ -34,25 +54,6 @@ public class FontFace extends AbstractModernizrTest {
 
   }
 
-  private static class Css2SupportRuleTest extends SupportRuleTest {
-
-    @Override
-    public boolean isFontFaceSupported(StyleSheet sheet) {    
-      if (sheet == null) {
-        return false;
-      }
-      try{
-        sheet.insertRule(FONT_FACE_RULE, 0);
-        boolean result = !UNKNOWN_REGULAR_EXPRESSION.test(sheet.getCssRules().item(0).getCssText());
-        sheet.deleteRule(sheet.getCssRules().getLenght()-1);
-        return result;
-     }catch (Exception e){
-        return false;
-      }
-      
-    }
-  }
-
   public static final Class<FontFace> FontFace = FontFace.class;
 
   static {
@@ -61,15 +62,14 @@ public class FontFace extends AbstractModernizrTest {
 
   @Override
   protected boolean runTest() {
-GWT.log("runTest() :: ");
     StyleElement style = Document.get().createStyleElement();
     HeadElement head = getHeadElement();
-    
+
     style.setType("text/css");
     head.insertFirst(style);
-GWT.log("hasCss2Feature() :: "+hasCss2Feature());    
-    SupportRuleTest test = hasCss2Feature() ? new Css2SupportRuleTest() : new SupportRuleTest();
-     
+    SupportRuleTest test = hasCss2Feature() ? new Css2SupportRuleTest()
+        : new SupportRuleTest();
+
     return test.isFontFaceSupported(StyleSheet.get(style));
   }
 

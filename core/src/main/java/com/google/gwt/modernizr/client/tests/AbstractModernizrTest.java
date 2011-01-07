@@ -20,66 +20,66 @@ public abstract class AbstractModernizrTest implements ModernizrTest {
 
   static class TestImpl {
 
-    public String getStyleVendorPrefix() {
-      return "-khtml-";
-    }
-
     public String getDomVendorPrefix() {
       return "Khtml";
+    }
+
+    public String getStyleVendorPrefix() {
+      return "-khtml-";
     }
   }
 
   static class TestImplGecko extends TestImpl {
     @Override
-    public String getStyleVendorPrefix() {
-      return "-moz-";
+    public String getDomVendorPrefix() {
+      return "Moz";
     }
 
     @Override
-    public String getDomVendorPrefix() {
-      return "Moz";
+    public String getStyleVendorPrefix() {
+      return "-moz-";
     }
   }
 
   static class TestImplOpera extends TestImpl {
     @Override
-    public String getStyleVendorPrefix() {
-      return "-o-";
+    public String getDomVendorPrefix() {
+      return "O";
     }
 
     @Override
-    public String getDomVendorPrefix() {
-      return "O";
+    public String getStyleVendorPrefix() {
+      return "-o-";
     }
   }
 
   static class TestImplSafari extends TestImpl {
     @Override
-    public String getStyleVendorPrefix() {
-      return "-webkit-";
+    public String getDomVendorPrefix() {
+      return "Webkit";
     }
 
     @Override
-    public String getDomVendorPrefix() {
-      return "Webkit";
+    public String getStyleVendorPrefix() {
+      return "-webkit-";
     }
   }
 
   static class TestImplTrident extends TestImpl {
     @Override
-    public String getStyleVendorPrefix() {
-      return "-ms";
-    }
-
-    @Override
     public String getDomVendorPrefix() {
       return "ms";
     }
 
+    @Override
+    public String getStyleVendorPrefix() {
+      return "-ms";
+    }
+
   }
 
-  private final static Map<String, String> testElementTagByEvent;
   protected final static Element modernizr = DOM.createElement("modernizr");
+  private final static Map<String, String> testElementTagByEvent;
 
   static {
     testElementTagByEvent = new HashMap<String, String>();
@@ -91,28 +91,6 @@ public abstract class AbstractModernizrTest implements ModernizrTest {
     testElementTagByEvent.put("load", "img");
     testElementTagByEvent.put("abort", "img");
   }
-
-  private Boolean cachedResult = null;
-  protected TestImpl impl = GWT.create(TestImpl.class);
-
-  public boolean getResult() {
-    GWT.log("getResult of "+this);
-    GWT.log("cachedResult "+cachedResult);
-    if (cachedResult == null) {
-      cachedResult = runTest();
-    }
-
-    return cachedResult;
-
-  }
-
-  protected abstract boolean runTest();
-
-
-
-  protected native Element getWindowElement() /*-{
-    return $wnd;
-  }-*/;
 
   /**
    * Determine if a given element supports the given event
@@ -130,66 +108,6 @@ public abstract class AbstractModernizrTest implements ModernizrTest {
 
     return _isEventSupported(eventName, testElement);
   }
-
-  protected void setCss(Element e, String css) {
-    assert e != null : "Element cannot be null";
-    e.getStyle().setProperty("cssText", css);
-  }
-
-  protected boolean testCssProperty(String property, CallBack callBack) {
-    assert property != null && property.length() > 0 : "Property cannot be null or empty";
-
-    String ucProperty = property.substring(0, 1).toUpperCase()
-        + property.substring(1);
-    String[] properties = new String[] { property,
-        impl.getDomVendorPrefix() + ucProperty };
-    for (String p : properties) {
-      if (cssPropertyExist(modernizr.getStyle(), p)
-          && (callBack == null || callBack.call(p))) {
-        return true;
-      }
-    }
-
-    return false;
-  }
-
-  protected native boolean cssPropertyExist(Style s, String property)/*-{
-    return s[property] !== undefined;
-  }-*/;
-
-  protected boolean testMediaQuery(String mediaQuery) {
-    StyleElement style = Document.get().createStyleElement();
-    DivElement div = Document.get().createDivElement();
-
-    style.setPropertyString("textContent", mediaQuery
-        + "{#modernizr{height:3px}}");
-
-    HeadElement head = getHeadElement();
-    
-    head.appendChild(style);
-    div.setId("modernizr");
-    Document.get().getDocumentElement().appendChild(div);
-
-    boolean result = div.getOffsetHeight() == 3;
-
-    style.removeFromParent();
-    div.removeFromParent();
-
-    return result;
-
-  }
-  
-  protected HeadElement getHeadElement(){
-    HeadElement head = Document.get().getElementsByTagName("head").getItem(0)
-    .cast();
-    return head;
-  }
-
-  protected native boolean propertyBelongToElement(Element element, String property)/*-{
-    return property in element;
-  }-*/;
-
-
   /**
    * function from http://yura.thinkweb2.com/isEventSupported/
    */
@@ -218,4 +136,82 @@ public abstract class AbstractModernizrTest implements ModernizrTest {
         element = null;
         return isSupported;
   }-*/;
+
+  protected TestImpl impl = GWT.create(TestImpl.class);
+
+  private Boolean cachedResult = null;
+
+  public boolean getResult() {
+    if (cachedResult == null) {
+      cachedResult = runTest();
+    }
+
+    return cachedResult;
+
+  }
+
+  protected native boolean cssPropertyExist(Style s, String property)/*-{
+    return s[property] !== undefined;
+  }-*/;
+
+  protected HeadElement getHeadElement() {
+    HeadElement head = Document.get().getElementsByTagName("head").getItem(0)
+        .cast();
+    return head;
+  }
+
+  protected native Element getWindowElement() /*-{
+    return $wnd;
+  }-*/;
+
+  protected native boolean propertyBelongToElement(Element element,
+      String property)/*-{
+    return property in element;
+  }-*/;
+
+  protected abstract boolean runTest();
+
+  protected void setCss(Element e, String css) {
+    assert e != null : "Element cannot be null";
+    e.getStyle().setProperty("cssText", css);
+  }
+
+  protected boolean testCssProperty(String property, CallBack callBack) {
+    assert property != null && property.length() > 0 : "Property cannot be null or empty";
+
+    String ucProperty = property.substring(0, 1).toUpperCase()
+        + property.substring(1);
+    String[] properties = new String[] { property,
+        impl.getDomVendorPrefix() + ucProperty };
+    for (String p : properties) {
+      if (cssPropertyExist(modernizr.getStyle(), p)
+          && (callBack == null || callBack.call(p))) {
+        return true;
+      }
+    }
+
+    return false;
+  }
+
+  protected boolean testMediaQuery(String mediaQuery) {
+    StyleElement style = Document.get().createStyleElement();
+    DivElement div = Document.get().createDivElement();
+
+    style.setPropertyString("textContent", mediaQuery
+        + "{#modernizr{height:3px}}");
+
+    HeadElement head = getHeadElement();
+
+    head.appendChild(style);
+    div.setId("modernizr");
+    Document.get().getDocumentElement().appendChild(div);
+
+    boolean result = div.getOffsetHeight() == 3;
+
+    style.removeFromParent();
+    div.removeFromParent();
+
+    return result;
+
+  }
 }
