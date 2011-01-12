@@ -1,0 +1,34 @@
+@external .gwt-Label, body;
+
+.gwt-Label {
+		color: red;
+}
+
+.subTest {
+		padding-left: 15px;
+}
+
+.yes {
+		color: green;
+}
+
+.black {
+		color: black;
+}
+
+@if (com.google.gwt.modernizr.client.Modernizr.cssColumns()) {
+	@if user.agent gecko gecko1_8 {
+		body{
+			-moz-column-count: 2;
+		}
+	}@elif user.agent safari {
+		body{
+			-webkit-column-count: 2;
+		}
+	}@else {
+		body{
+			column-count: 2;
+		}
+	}	
+}
+

@@ -1,15 +1,65 @@
-package com.google.gwt.modernizr.client;
+/*
+ * Copyright 2011 Julien Dramaix.
+ * 
+ * Licensed under the MIT License, Version 2.0 (the "License"); 
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
 
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
+ */
+package com.google.gwt.modernizr.client.runtimesample;
+
+import static com.google.gwt.modernizr.client.runtimesample.TestAllExample.Resources.Resources;
 import com.google.gwt.core.client.Duration;
 import com.google.gwt.core.client.EntryPoint;
+import com.google.gwt.core.client.GWT;
+import com.google.gwt.modernizr.client.Modernizr;
 import com.google.gwt.modernizr.client.Modernizr.AudioFormat;
 import com.google.gwt.modernizr.client.Modernizr.InputAttribute;
 import com.google.gwt.modernizr.client.Modernizr.InputType;
 import com.google.gwt.modernizr.client.Modernizr.VideoFormat;
+import com.google.gwt.resources.client.ClientBundle;
+import com.google.gwt.resources.client.CssResource;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
 
+/**
+ * Test all modernizr features.
+ * 
+ * @author Julien Dramaix (julien.dramaix@gmail.com)
+ * 
+ */
 public class TestAllExample implements EntryPoint {
+
+  public static interface Resources extends ClientBundle {
+    public static Resources Resources = GWT.create(Resources.class);
+
+    @Source("style.css")
+    public Css css();
+  }
+
+  public static interface Css extends CssResource {
+
+    public String subTest();
+
+    public String yes();
+
+    public String black();
+
+  }
 
   private int testCounter;
   private int subTestCounter;
@@ -17,6 +67,8 @@ public class TestAllExample implements EntryPoint {
   private int labelCreationTime;
 
   public void onModuleLoad() {
+    Resources.css().ensureInjected();
+
     testCounter = 0;
     subTestCounter = 0;
     time = new Duration();
@@ -119,6 +171,7 @@ public class TestAllExample implements EntryPoint {
 
     // Audio
     createAndAddLabel("HTML5 audio", Modernizr.audio(), false);
+
     // Audio format
     for (AudioFormat format : AudioFormat.values()) {
 
@@ -156,7 +209,7 @@ public class TestAllExample implements EntryPoint {
 
     // Smil
     createAndAddLabel("SMIL", Modernizr.smil(), false);
-    
+
     // Svg clip paths
     createAndAddLabel("SVG Clipping", Modernizr.svgClipPaths(), false);
 
@@ -164,9 +217,10 @@ public class TestAllExample implements EntryPoint {
     createAndAddLabel("Input attributes", null, false);
 
     for (InputAttribute attr : InputAttribute.values()) {
-      createAndAddLabel(attr.name().toLowerCase(), Modernizr.inputAttribute(attr), true);
+      createAndAddLabel(attr.name().toLowerCase(), Modernizr
+          .inputAttribute(attr), true);
     }
-    
+
     // Input types
     createAndAddLabel("Input types", null, false);
 
@@ -178,17 +232,6 @@ public class TestAllExample implements EntryPoint {
     int gwtModernizrTime = time.elapsedMillis() - labelCreationTime;
     durationLabel.setText("GWTModernizr took: " + gwtModernizrTime + "ms");
 
-    /*
-     * //for testing purpose
-     * 
-     * Button reload = new Button("reload"); reload.addClickHandler(new
-     * ClickHandler() {
-     * 
-     * public void onClick(ClickEvent event) { RootPanel.get().clear();
-     * onModuleLoad();
-     * 
-     * } }); RootPanel.get().add(reload);
-     */
   }
 
   private void createAndAddLabel(String test, Boolean testResult,
@@ -204,12 +247,12 @@ public class TestAllExample implements EntryPoint {
     Label l = new Label(s);
 
     if (subTest) {
-      l.addStyleName("subTest");
+      l.addStyleName(Resources.css().subTest());
     }
     if (testResult == null) {
-      l.addStyleName("black");
+      l.addStyleName(Resources.css().black());
     } else if (testResult) {
-      l.addStyleName("yes");
+      l.addStyleName(Resources.css().yes());
     }
 
     RootPanel.get().add(l);

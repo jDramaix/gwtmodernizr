@@ -1,0 +1,93 @@
+@external .gwt-Label, body;
+.gwt-Label {
+		border: 1px solid black;
+		padding: 15px;
+		width: 200px;
+		margin-bottom: 15px;
+		background-color: #DDDDDD;
+}
+
+/**
+ * If the browser supports css columns, display content on 4 columns. Otherwise, float left each label
+ */
+@if (com.google.gwt.modernizr.client.Modernizr.cssColumns()) {
+	@if user.agent gecko gecko1_8 {
+		body{
+			-moz-column-count: 4;
+		}
+	}@elif user.agent safari {
+		body{
+			-webkit-column-count: 4;
+		}
+	}@else {
+		body{
+			column-count: 4;
+		}
+	}	
+}@else {
+	.gwt-Label {
+		float: left;
+	}		
+}
+
+/**
+ * Use border radius feauture if available
+ */
+@if (com.google.gwt.modernizr.client.Modernizr.borderRadius()) {
+		@if user.agent gecko gecko1_8 {
+				.borderRadius {
+						-moz-border-radius: 15px;
+				}
+		}
+		@else {
+				.borderRadius {
+						border-radius: 15px;
+				}
+		}
+}
+
+/**
+ * Use box shadow feature if available
+ */
+@if (com.google.gwt.modernizr.client.Modernizr.boxShadow()) {
+		@if user.agent gecko gecko1_8 {
+				.boxShadow {
+						-moz-box-shadow: 10px 10px 5px #888;
+				}
+		}
+		@elif user.agent safari {
+				.boxShadow {
+						-webkit-box-shadow: 10px 10px 5px #888;
+				}
+		}
+		@else {
+				.boxShadow {
+						box-shadow: 10px 10px 5px #888;
+				}
+		}
+}
+
+/**
+ * Use box css gradient feature if available
+ */
+@if (com.google.gwt.modernizr.client.Modernizr.cssGradients()) {
+		@if user.agent gecko gecko1_8 {
+				.cssGradients {
+						background: -moz-linear-gradient(top left, red, rgba(255,0,0,0));
+				}
+		}
+		@elif user.agent safari {
+				.cssGradients {
+						background: #ccc
+								-webkit-gradient(linear, left top, left bottom, from(rgba(255, 255, 255,
+								.4) ), color-stop(0.5, rgba(255, 255, 255, .7) ),
+								color-stop(0.5, rgba(0, 0, 0, .2) ), to(rgba(0, 0, 0, .1) ) );
+				}
+		}
+		@else {
+				.cssGradients {
+						box-shadow: 10px 10px 5px #888;
+				}
+		}
+		.
+}
