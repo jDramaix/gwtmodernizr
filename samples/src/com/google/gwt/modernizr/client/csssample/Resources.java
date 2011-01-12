@@ -13,6 +13,10 @@ public interface Resources extends ClientBundle {
 
     public String cssGradients();
 
+    public String textShadow();
+
+    public String cssTransforms();
+
   }
 
   public Resources Resources = GWT.create(Resources.class);

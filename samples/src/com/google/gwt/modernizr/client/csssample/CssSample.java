@@ -15,9 +15,8 @@ public class CssSample implements EntryPoint {
     addLabel("css border-radius", Modernizr.borderRadius(), Resources.css().borderRadius());
     addLabel("css box-shadow", Modernizr.boxShadow(), Resources.css().boxShadow());
     addLabel("css gradients", Modernizr.cssGradients(), Resources.css().cssGradients());
-    
-
-  
+    addLabel("text shadow", Modernizr.textShadow(), Resources.css().textShadow());
+    addLabel("css 2D transforms", Modernizr.cssTransforms(), Resources.css().cssTransforms());
 
   }
   

@@ -1,4 +1,4 @@
-@external .gwt-Label, body;
+@external .gwt-Label;
 .gwt-Label {
 		border: 1px solid black;
 		padding: 15px;
@@ -8,30 +8,7 @@
 }
 
 /**
- * If the browser supports css columns, display content on 4 columns. Otherwise, float left each label
- */
-@if (com.google.gwt.modernizr.client.Modernizr.cssColumns()) {
-	@if user.agent gecko gecko1_8 {
-		body{
-			-moz-column-count: 4;
-		}
-	}@elif user.agent safari {
-		body{
-			-webkit-column-count: 4;
-		}
-	}@else {
-		body{
-			column-count: 4;
-		}
-	}	
-}@else {
-	.gwt-Label {
-		float: left;
-	}		
-}
-
-/**
- * Use border radius feauture if available
+ * Use border radius feature if available
  */
 @if (com.google.gwt.modernizr.client.Modernizr.borderRadius()) {
 		@if user.agent gecko gecko1_8 {
@@ -73,20 +50,51 @@
 @if (com.google.gwt.modernizr.client.Modernizr.cssGradients()) {
 		@if user.agent gecko gecko1_8 {
 				.cssGradients {
-						background: -moz-linear-gradient(top left, red, rgba(255,0,0,0));
+						background: -moz-linear-gradient(literal('top left'), red,
+								rgba(255, 0, 0, 0) );
 				}
 		}
 		@elif user.agent safari {
 				.cssGradients {
-						background: #ccc
-								-webkit-gradient(linear, left top, left bottom, from(rgba(255, 255, 255,
-								.4) ), color-stop(0.5, rgba(255, 255, 255, .7) ),
-								color-stop(0.5, rgba(0, 0, 0, .2) ), to(rgba(0, 0, 0, .1) ) );
+						background: -webkit-gradient(linear, literal('right top'),
+								literal('left bottom'), from(red), to(rgba(255, 0, 0, 0) ) );
 				}
 		}
 		@else {
 				.cssGradients {
 						box-shadow: 10px 10px 5px #888;
+				}
+		}
+		.
+}
+
+/**
+ * Use text shadow
+ */
+@if (com.google.gwt.modernizr.client.Modernizr.textShadow()) {
+		.textShadow {
+				color: white;
+				text-shadow: 1px 1px 1px red;
+		}
+}
+
+/**
+ * Use box css 2D transform feature if available
+ */
+@if (com.google.gwt.modernizr.client.Modernizr.cssGradients()) {
+		@if user.agent gecko gecko1_8 {
+				.cssTransforms {
+						-moz-transform: rotate(-25deg);
+				}
+		}
+		@elif user.agent safari {
+				.cssTransforms {
+						-webkit-transform: rotate(-25deg);
+				}
+		}
+		@else {
+				.cssTransforms {
+						transform: rotate(-25deg);
 				}
 		}
 		.
