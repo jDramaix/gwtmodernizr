@@ -1,101 +1,102 @@
 @external .gwt-Label;
 .gwt-Label {
-		border: 1px solid black;
-		padding: 15px;
-		width: 200px;
-		margin-bottom: 15px;
-		background-color: #DDDDDD;
+    border: 1px solid black;
+    padding: 15px;
+    width: 200px;
+    margin-bottom: 15px;
+    background-color: #DDDDDD;
 }
 
 /**
  * Use border radius feature if available
  */
 @if (com.google.gwt.modernizr.client.Modernizr.borderRadius()) {
-		@if user.agent gecko gecko1_8 {
-				.borderRadius {
-						-moz-border-radius: 15px;
-				}
-		}
-		@else {
-				.borderRadius {
-						border-radius: 15px;
-				}
-		}
+    @if user.agent gecko gecko1_8 {
+        .borderRadius {
+            -moz-border-radius: 15px;
+        }
+    }
+    @else {
+        .borderRadius {
+            border-radius: 15px;
+        }
+    }
 }
 
 /**
  * Use box shadow feature if available
  */
 @if (com.google.gwt.modernizr.client.Modernizr.boxShadow()) {
-		@if user.agent gecko gecko1_8 {
-				.boxShadow {
-						-moz-box-shadow: 10px 10px 5px #888;
-				}
-		}
-		@elif user.agent safari {
-				.boxShadow {
-						-webkit-box-shadow: 10px 10px 5px #888;
-				}
-		}
-		@else {
-				.boxShadow {
-						box-shadow: 10px 10px 5px #888;
-				}
-		}
+    @if user.agent gecko gecko1_8 {
+        .boxShadow {
+            -moz-box-shadow: 10px 10px 5px #888;
+        }
+    }
+    @elif user.agent safari {
+        .boxShadow {
+            -webkit-box-shadow: 10px 10px 5px #888;
+        }
+    }
+    @else {
+        .boxShadow {
+            box-shadow: 10px 10px 5px #888;
+        }
+    }
 }
 
 /**
  * Use box css gradient feature if available
  */
 @if (com.google.gwt.modernizr.client.Modernizr.cssGradients()) {
-		@if user.agent gecko gecko1_8 {
-				.cssGradients {
-						background: -moz-linear-gradient(literal('top left'), red,
-								rgba(255, 0, 0, 0) );
-				}
-		}
-		@elif user.agent safari {
-				.cssGradients {
-						background: -webkit-gradient(linear, literal('right top'),
-								literal('left bottom'), from(red), to(rgba(255, 0, 0, 0) ) );
-				}
-		}
-		@else {
-				.cssGradients {
-						box-shadow: 10px 10px 5px #888;
-				}
-		}
-		.
+    @if user.agent gecko gecko1_8 {
+        .cssGradients {
+            background: -moz-linear-gradient(literal('top left'), red,
+                rgba(255, 0, 0, 0) );
+        }
+    }
+    @elif user.agent safari {
+        .cssGradients {
+            background: -webkit-gradient(linear, literal('right top'),
+                literal('left bottom'), from(red), to(rgba(255, 0, 0, 0)
+                ) );
+        }
+    }
+    @else {
+        .cssGradients {
+            box-shadow: 10px 10px 5px #888;
+        }
+    }
+    .
 }
 
 /**
  * Use text shadow
  */
 @if (com.google.gwt.modernizr.client.Modernizr.textShadow()) {
-		.textShadow {
-				color: white;
-				text-shadow: 1px 1px 1px red;
-		}
+    .textShadow {
+        color: white;
+        text-shadow: 1px 1px 1px red;
+    }
 }
 
 /**
  * Use box css 2D transform feature if available
  */
 @if (com.google.gwt.modernizr.client.Modernizr.cssGradients()) {
-		@if user.agent gecko gecko1_8 {
-				.cssTransforms {
-						-moz-transform: rotate(-25deg);
-				}
-		}
-		@elif user.agent safari {
-				.cssTransforms {
-						-webkit-transform: rotate(-25deg);
-				}
-		}
-		@else {
-				.cssTransforms {
-						transform: rotate(-25deg);
-				}
-		}
-		.
+    @if user.agent gecko gecko1_8 {
+        .cssTransforms {
+            -moz-transform: rotate(-25deg);
+        }
+    }
+    @elif user.agent safari {
+        .cssTransforms {
+            -webkit-transform: rotate(-25deg);
+        }
+    }
+    @else {
+        .cssTransforms {
+            transform: rotate(-25deg);
+        }
+    }
+    .
 }
