@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module rename-to='RuntimeSample'>
+  <!-- Inherit GWTModernizr.                        -->
+  <inherits name='com.google.gwt.modernizr.GwtModernizr'/>
+
+  <!-- Specify the app entry point class.                         -->
+  <entry-point class='com.google.gwt.modernizr.client.runtimesample.RuntimeSample'/>
+
+
+</module>

@@ -22,7 +22,8 @@
  */
 package com.google.gwt.modernizr.client.runtimesample;
 
-import static com.google.gwt.modernizr.client.runtimesample.TestAllExample.Resources.Resources;
+import static com.google.gwt.modernizr.client.runtimesample.RuntimeSample.Resources.Resources;
+
 import com.google.gwt.core.client.Duration;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
@@ -33,6 +34,7 @@ import com.google.gwt.modernizr.client.Modernizr.InputType;
 import com.google.gwt.modernizr.client.Modernizr.VideoFormat;
 import com.google.gwt.resources.client.ClientBundle;
 import com.google.gwt.resources.client.CssResource;
+import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
 
@@ -42,7 +44,7 @@ import com.google.gwt.user.client.ui.RootPanel;
  * @author Julien Dramaix (julien.dramaix@gmail.com)
  * 
  */
-public class TestAllExample implements EntryPoint {
+public class RuntimeSample implements EntryPoint {
 
   public static interface Resources extends ClientBundle {
     public static Resources Resources = GWT.create(Resources.class);
@@ -75,8 +77,8 @@ public class TestAllExample implements EntryPoint {
     labelCreationTime = 0;
 
     // Loading time !
-    Label durationLabel = new Label();
-    RootPanel.get().add(durationLabel);
+    HTML duration = new HTML();
+    RootPanel.get().add(duration);
 
     // flexbox
     createAndAddLabel("Flexbox", Modernizr.flexbox(), false);
@@ -230,7 +232,7 @@ public class TestAllExample implements EntryPoint {
 
     // set durationTime
     int gwtModernizrTime = time.elapsedMillis() - labelCreationTime;
-    durationLabel.setText("GWTModernizr took: " + gwtModernizrTime + "ms");
+    duration.setHTML("<p>GWTModernizr took: " + gwtModernizrTime + "ms</p>");
 
   }
 
