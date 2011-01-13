@@ -82,7 +82,7 @@
 /**
  * Use box css 2D transform feature if available
  */
-@if (com.google.gwt.modernizr.client.Modernizr.cssGradients()) {
+@if (com.google.gwt.modernizr.client.Modernizr.cssTransforms()) {
     @if user.agent gecko gecko1_8 {
         .cssTransforms {
             -moz-transform: rotate(-25deg);
@@ -91,6 +91,11 @@
     @elif user.agent safari {
         .cssTransforms {
             -webkit-transform: rotate(-25deg);
+        }
+    }
+    @elif user.agent opera {
+        .cssTransforms {
+            -o-transform: rotate(-25deg);
         }
     }
     @else {
