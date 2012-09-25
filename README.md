@@ -76,7 +76,7 @@ You can also use gwtmodernizr to branch your css rules :
 GWTModernizr in action
 ----------------------
 
-  * GWT port of the [http://modernizr.github.com/Modernizr/output.html outputTest of Modernizr], this example lists all features detected by GwtModernizer and shows if your browser supports their : http://gwtmodernizr.googlecode.com/svn/trunk/samples/demo/RuntimeSample/RuntimeSample.html
+  * GWT port of the [outputTest of Modernizr](http://modernizr.github.com/Modernizr/output.html), this example lists all features detected by GwtModernizer and shows if your browser supports their : http://gwtmodernizr.googlecode.com/svn/trunk/samples/demo/RuntimeSample/RuntimeSample.html
   
   * Css branching example : http://gwtmodernizr.googlecode.com/svn/trunk/samples/demo/csssample/CssSample.html
  
